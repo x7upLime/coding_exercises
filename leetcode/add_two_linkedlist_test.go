@@ -1,38 +1,8 @@
 package main
 
 import (
-	"slices"
 	"testing"
 )
-
-func GenerateLL(digits []int) *ListNode {
-	slices.Reverse(digits)
-	var lastNode *ListNode
-	for _, v := range digits {
-		lst := ListNode{
-			Val:  v,
-			Next: lastNode,
-		}
-
-		lastNode = &lst
-	}
-	return lastNode
-}
-
-func LLToNum(ll *ListNode) int {
-	sm := 0
-	mltplr := 1
-	for {
-		sm += ll.Val * mltplr
-		if ll.Next == nil {
-			break
-		}
-		ll = ll.Next
-		mltplr = mltplr * 10
-	}
-
-	return sm
-}
 
 func TestAddTwoNumbers(t *testing.T) {
 	cases := []struct {
