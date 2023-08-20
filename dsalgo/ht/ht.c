@@ -6,15 +6,6 @@
 #include <string.h>
 #include <assert.h>
 
-struct hti {
-  const char* key;  // current key
-  void* value;      // current value
-
-  // Don't use these fields directly.
-  ht* _table;       // reference to hash table being iterated
-  size_t _index;    // current index into ht._entries
-};
-
 ht*
 ht_create(int initCap) {
   ht *table = malloc(sizeof(ht));
@@ -203,6 +194,7 @@ ht_length(ht *table) {
 hti
 ht_iterator(ht *table) {
   hti it;
+
   it._table = table;
   it._index = 0;
   return it;
