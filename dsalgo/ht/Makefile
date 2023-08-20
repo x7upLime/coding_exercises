@@ -4,15 +4,16 @@ LIBS =
 
 all: main test
 
-main: ht.o htdemo.o
-	$(CC) $(CFLAGS) -o a.out ht.o htdemo.o $(LIBS)
+main: ht_demo.o
+	$(CC) $(CFLAGS) -o a.out ht.o ht_demo.o $(LIBS)
 
 test: CFLAGS += -DTESTABLE
-test: ht.o ht_test.o
-	$(CC) $(CFLAGS) -o test ht.o ht_test.o $(LIBS)
+test: ht.c ht_test.c ht.h
+	$(CC) $(CFLAGS) -o test ht.c ht_test.c $(LIBS)
 
 ht_demo.o: ht.c ht_demo.c ht.h
-	$(CC) $(CFLAGS) -c ht_demo.c ht.h
+	$(CC) $(CFLAGS) -c ht_demo.c ht.c
+
 ht.o: ht.c ht.h
 	$(CC) $(CFLAGS) -c ht.c
 
