@@ -28,28 +28,16 @@ const char* ht_set(ht* table, const char* key, void* value);
 size_t ht_length(ht* table);
 
 // Hash table iterator: create with ht_iterator, iterate with ht_next.
-/*
-  Here the structure declaration is needed for the way
-  that the access of the fields is designed..
-
-  BUT.. here there are fields that we might want to hide.
-  TODO: hide the implementation of this struct
-  	i.e. extract key/val of the iterator with functions
- */
-typedef struct hti {
-  const char* key;  // current key
-  void* value;      // current value
-
-  // Don't use these fields directly.
-  ht* _table;       // reference to hash table being iterated
-  size_t _index;    // current index into ht._entries
-} hti;
-
+typedef struct hti hti;
 
 // Return new hash table iterator (for use with ht_next).
-hti ht_iterator(ht* table);
+hti *ht_iterator(ht* table);
 
 // Move iterator to next item in hash table, update iterator's key
 // and value to current item, and return true. If there are no more
 // items, return false. Don't call ht_set during iteration.
 bool ht_next(hti* it);
+
+// This one extracts the key/value of the current entry in the
+// iterator, and frees the relative memory.
+void htiter_extract(hti *it, char **key, int *val);

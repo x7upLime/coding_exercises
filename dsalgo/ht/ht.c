@@ -191,12 +191,17 @@ ht_length(ht *table) {
   return table->length;
 }
 
-hti
+hti*
 ht_iterator(ht *table) {
-  hti it;
+  hti *it;
+  
+  it = (hti*) malloc(sizeof(hti));
+  if (it == NULL) {
+    return NULL;
+  }
 
-  it._table = table;
-  it._index = 0;
+  it->_table = table;
+  it->_index = 0;
   return it;
 }
 
@@ -227,4 +232,14 @@ ht_next(hti *it) {
   }
 
   return false;
+}
+
+void
+htiter_extract(hti *it, char **key, int *val) {
+  *key = (char*)it->key;
+  *val = *(int*)it->value;
+  
+  free(it->value);
+
+  return;
 }

@@ -44,11 +44,14 @@ main(void) {
     }
   }
 
-  hti it = ht_iterator(counts);
+  hti *it = ht_iterator(counts);
   printf("\n\nOutcome:\n");
-  while (ht_next(&it)) {
-    printf("%s %d\n", it.key, *(int*)it.value);
-    free(it.value);
+  while (ht_next(it)) {
+    char *key = NULL;
+    int val = 0;
+    htiter_extract(it, &key, &val);
+    
+    printf("%s %d\n", key, val);
   }
 
   printf("Hash table total length: %d\n", (int)ht_length(counts));
