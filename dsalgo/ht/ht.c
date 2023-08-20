@@ -1,21 +1,10 @@
+#include "ht_structs.h"
 #include "ht.h"
+
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
 #include <assert.h>
-
-// hash tables are structures with key/value entries
-struct ht_entry {
-  const char *key; // NULL if this slot is empty
-  void *value;
-};
-typedef struct ht_entry ht_entry; // unexported
-
-struct ht{
-  ht_entry *entries; // ptr to entry [0] in an array of entries
-  size_t capacity;  // how many entries does the hash table has
-  size_t length;   // number of used entries in the hash table
-};
 
 struct hti {
   const char* key;  // current key

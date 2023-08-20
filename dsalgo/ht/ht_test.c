@@ -1,7 +1,11 @@
+#include "ht_structs.h"
+#include "ht.h"
+
+#include <stddef.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
-typedef struct ht_entry ht_entry;
 
 const char*
 ht_set_entry(ht_entry *entries, size_t capacity,
