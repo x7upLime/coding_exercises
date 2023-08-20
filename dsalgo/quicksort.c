@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 void
 quicksort(int data[], int first, int last){
@@ -33,13 +34,34 @@ quicksort(int data[], int first, int last){
 }
 
 int
+countOccur(int arr[],int exists[], int len, int val) {
+  int i;
+  int cntr = 0;
+
+  for(i = 0; i < len; i++) {
+    if (arr[i] == val) {
+      if (exists[i] != 0) return 0;
+      cntr++;
+    }
+  }
+
+  return cntr;
+}
+
+int
 main(void){
   int miarr[] = {4,1,3,5,21,6,26,7,232,1,5,6,2,391,93,2,14,423,234,6,6,3,32,1,34,4,56,2,7,8,4,3,12,1,4,63};
-  int count = 12;
+  int miarr1[] = {4,1,3,5,21,6,26,7,232,1,5,6,2,391,93,2,14,423,234,6,6,3,32,1,34,4,56,2,7,8,4,3,12,1,4,63};
+  int miarr2[] = {4,1,3,5,21,6,26,7,232,1,5,6,2,391,93,2,14,423,234,6,6,3,32,1,34,4,56,2,7,8,4,3,12,1,4,63};
 
-  quicksort(miarr, 0, (sizeof(miarr)/sizeof(miarr[0]))-1);
+  int r = (sizeof(miarr)/sizeof(miarr2[0]));
 
-  for(int i = 0; i < sizeof(miarr)/sizeof(miarr[0]); i++) {
-    printf("arr elem %2d is %d\n", i, miarr[i]);
+  int c;
+  int counts[r];
+  memset(&counts, 0, r*sizeof(counts[0]));
+
+  for (int i = 0; i < r; i++) {
+    c = countOccur(miarr, counts, r, miarr[i]);
+    printf("Got %4d %d times\n", miarr[i], c);
   }
 }
