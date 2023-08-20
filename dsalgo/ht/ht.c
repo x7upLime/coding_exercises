@@ -151,6 +151,8 @@ ht_set_entry(ht_entry *entries, size_t capacity,
   return key;
 }
 
+// it reallocates another ht with capacity = oldCapacity *2
+// and frees the old hash table
 static bool
 ht_expand(ht *table) {
   size_t new_capacity = table->capacity *2;
