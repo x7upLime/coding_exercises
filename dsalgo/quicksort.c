@@ -40,14 +40,14 @@ quicksort(int data[], int first, int last){
 	    DEBUG("data[i] <= data[pivot] && i < last\n");
 	    DEBUG("data[%d] <= data[%d] && %d < %d\n", i, pivot, i, last);
 	    i++;
-	    DEBUG("Incremented i to %d\n", i);
+	    DEBUG("Incremented i by %d\n", i);
 	  }
 	  
 	  while(data[j] > data[pivot]) {
 	    DEBUG("data[j] > data[pivot]\n");
 	    DEBUG("data[%d] > data[%d]\n", j, pivot);
 	    j--;
-	    DEBUG("Incremented j to %d\n", j);
+	    DEBUG("Incremented j by %d\n", j);
 	  }
 	  
 	  if(i<j)
