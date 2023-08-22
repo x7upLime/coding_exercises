@@ -36,16 +36,16 @@ quicksort(int data[], int first, int last){
 
       while(i<j)
 	{
+	  DEBUG("data[i] <= data[pivot] && i < last\n");
+	  DEBUG("data[%d] <= data[%d] && %d < %d\n", i, pivot, i, last);
 	  while(data[i] <= data[pivot] && i < last) {
-	    DEBUG("data[i] <= data[pivot] && i < last\n");
-	    DEBUG("data[%d] <= data[%d] && %d < %d\n", i, pivot, i, last);
 	    i++;
 	    DEBUG("Incremented i by 1 to %d\n", i);
 	  }
-	  
+
+	  DEBUG("data[j] > data[pivot]\n");
+	  DEBUG("data[%d] > data[%d]\n", j, pivot);
 	  while(data[j] > data[pivot]) {
-	    DEBUG("data[j] > data[pivot]\n");
-	    DEBUG("data[%d] > data[%d]\n", j, pivot);
 	    j--;
 	    DEBUG("Incremented j by 1 to %d\n", j);
 	  }
@@ -141,9 +141,46 @@ checkSameHT(ht *ht1, ht *ht2){
   }
 }
 
+/*
+  This process is expensive at its most,
+  when the array is already sorted.
+  
+ */
 int
-main(void){
-  int miarr[] = {4,1,3,5,21,6,26,7,232,1,5,6,2,391,93,2,14,423,234,6,6,3,32,1,34,4,56,2,7,8,4,3,12,1,4,63};
+partition(int arr[], int p, int r) {
+  int x = arr[r];
+  int i = p -1;
+  int temp;
+
+  for (int j = 0; j < r; j++) {
+    if (arr[j] <= x) {
+      i = i+1;
+      temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+      PRINTARR(arr);
+    }
+  }
+
+  temp = arr[i+1];
+  arr[i+1] = arr[r];
+  arr[r] = temp;
+  return i+1;
+}
+
+void
+quicksortBook(int arr[], int p, int r) {
+  int pivot;
+  pivot = partition(arr, p, r);
+  printf("pivot in ");
+  PRINTARR(arr);
+  printf("is %d\n", pivot);
+}
+
+int
+actualmain(void){
+  /* int miarr[] = {4,1,3,5,21,6,26,7,232,1,5,6,2,391,93,2,14,423,234,6,6,3,32,1,34,4,56,2,7,8,4,3,12,1,4,63}; */
+  int miarr[] = {2,5,1,4,3, 1};
   int r = (sizeof(miarr)/sizeof(miarr[0]));
   #ifdef DBG
   array_size_global = r; //DEBUG
@@ -155,10 +192,40 @@ main(void){
   populateHT(table1, miarr, r);
   DEBUG("input array looks like this: ");
   PRINTARR(miarr);
-  quicksort(miarr, 0, r-1);  
+  quicksortBook(miarr, 0, r-1);  
   populateHT(table2, miarr, r);
 
   checkSameHT(table1, table2);
 
   return 0;
+}
+
+#define RES(arrr, p)					\
+  do {							\
+    int pivot;						\
+    printf("pivoting:  ");				\
+    PRINTARR(arrr);					\
+    pivot = partition(arrr, 0, array_size_global-1);	\
+    printf("we've got: ");				\
+    PRINTARR(arrr);					\
+    printf("with pivot %d\n", pivot);			\
+    printf("\n");					\
+  } while(0)
+
+int main(void) {
+  int miarr1[] = {1,2,3,4,5};
+  int miarr2[] = {2,5,1,2,4};
+  int miarr3[] = {1,3,3,3,5};
+  int miarr4[] = {6,5,7,4,5};
+  int miarr5[] = {1,2,3,4,5};
+  int miarr6[] = {5,2,5,7,2};
+
+  array_size_global = 5;
+  
+  RES(miarr1, pivot);
+  RES(miarr2, pivot);
+  RES(miarr3, pivot);
+  RES(miarr4, pivot);
+  RES(miarr5, pivot);
+  RES(miarr6, pivot);
 }
