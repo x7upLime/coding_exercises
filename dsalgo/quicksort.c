@@ -2,13 +2,14 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
 
 #ifdef DBG
 size_t array_size_global;
 #define PRINTARR(arr)						\
   do {								\
     for (size_t i = 0; i < array_size_global; i++) {		\
-      printf("%d ", arr[i]);					\
+      printf("%3d ", arr[i]);					\
     }								\
     printf("\n");						\
   }while(0)
@@ -158,7 +159,6 @@ partition(int arr[], int p, int r) {
       temp = arr[i];
       arr[i] = arr[j];
       arr[j] = temp;
-      PRINTARR(arr);
     }
   }
 
@@ -205,7 +205,7 @@ actualmain(void){
 #define RES(arrr, p)					\
   do {							\
     int pivot;						\
-    printf("pivoting:  ");				\
+    printf("pivoting:\n");				\
     PRINTARR(arrr);					\
     pivot = partition(arrr, 0, array_size_global-1);	\
     printf("we've got: ");				\
