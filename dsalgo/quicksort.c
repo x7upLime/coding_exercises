@@ -152,7 +152,7 @@ partition(int arr[], int p, int r) {
   int i = p -1;
   int temp;
 
-  for (int j = 0; j < r; j++) {
+  for (int j = p; j < r; j++) {
     if (arr[j] <= x) {
       i = i+1;
       temp = arr[i];
@@ -171,10 +171,12 @@ partition(int arr[], int p, int r) {
 void
 quicksortBook(int arr[], int p, int r) {
   int pivot;
-  pivot = partition(arr, p, r);
-  printf("pivot in ");
-  PRINTARR(arr);
-  printf("is %d\n", pivot);
+
+  if (p < r) {
+    pivot = partition(arr, p, r);
+    quicksortBook(arr, p, pivot-1);
+    quicksortBook(arr, pivot+1, r);
+  }
 }
 
 int
