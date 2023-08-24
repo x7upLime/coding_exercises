@@ -214,20 +214,20 @@ actualmain(void){
     printf("\n");					\
   } while(0)
 
-int main(void) {
-  int miarr1[] = {1,2,3,4,5};
-  int miarr2[] = {2,5,1,2,4};
-  int miarr3[] = {1,3,3,3,5};
-  int miarr4[] = {6,5,7,4,5};
-  int miarr5[] = {1,2,3,4,5};
-  int miarr6[] = {5,2,5,7,2};
 
   array_size_global = 5;
+int
+main(void) {
+  int miarr[] = {1,4,2,67,4,2,8,9,1,2,5,1,67,8,9,4,2,7,8,3,2,6,7,3,2,2,3,5,1,67,4,2,7,3,2,1};
+  int size = sizeof(miarr)/sizeof(miarr[0]);
+
+  array_size_global = size;
   
-  RES(miarr1, pivot);
-  RES(miarr2, pivot);
-  RES(miarr3, pivot);
-  RES(miarr4, pivot);
-  RES(miarr5, pivot);
-  RES(miarr6, pivot);
+  printf("starting with: ");
+  PRINTARR(miarr);
+
+  quicksortBook(miarr, 0, size-1);
+
+  printf("end result is: ");
+  PRINTARR(miarr);
 }
