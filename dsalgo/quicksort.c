@@ -214,8 +214,35 @@ actualmain(void){
     printf("\n");					\
   } while(0)
 
+void
+generateRandomIntArray(int arr[], size_t size, int min, int max) {
+  for (size_t i = 0; i < size; i++) {
+    arr[i] = rand() % (max - min +1) + min;
+  }
+}
 
+int TestQuicksort(void) {
   array_size_global = 5;
+  int minval = 0;
+  int maxval = 100;
+  int narrays = 20;
+
+  srand(time(NULL));
+    
+  for (int i = 0; i < narrays; i++) {
+    int *arr = malloc(sizeof(int)*array_size_global);
+    if (arr == NULL) {
+      printf("something wrong malloc.\n");
+      return 1;
+    }
+    
+    generateRandomIntArray(arr, array_size_global, minval, maxval);
+    RES(arr, 0);
+  }
+
+  return 0;
+}
+
 int
 main(void) {
   int miarr[] = {1,4,2,67,4,2,8,9,1,2,5,1,67,8,9,4,2,7,8,3,2,6,7,3,2,2,3,5,1,67,4,2,7,3,2,1};
